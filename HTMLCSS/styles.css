@@ -1,0 +1,30 @@
+/* h1{
+    font-size: larger;
+    font-style: italic;
+    background-color: azure;
+}
+
+body{
+    padding-top: 0;
+
+}
+
+.text-input{
+   height: 25px; 
+   border-radius: 12px;
+   padding-left: 5px;
+   padding-right: 5px;
+}
+p {
+   color: green;
+    font-weight: "bold";
+  }
+  
+   */
+
+   #main-container {
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #e6e6e6;
+  }
+  

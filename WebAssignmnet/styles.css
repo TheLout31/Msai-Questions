@@ -1,103 +1,98 @@
 * {
-    padding: 0%;
-  }
-  h1 {
-    color: navy;
-    font-size: 28px;
-    background-color: #f0f0f0;
-    text-align: center;
-    font-family: "Times New Roman", Times, serif;
-  }
-  h2 {
-    color: navy;
-    font-size: 24px;
-    font-family: "Times New Roman", Times, serif;
-  }
-
-  h3 {
-    color: navy;
-    font-size: 24px;
-    font-family: "Times New Roman", Times, serif;
-  }
-
-  p {
-    font-size: 15;
-    text-align: justify;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-
-  #second-section {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 20px;
-  }
-
-  #HTTP {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 20px;
-  }
-  #client_vs_sever {
-    justify-content: center;
-    width: 100%;
-    align-items: center;
-    margin-bottom: 20px;
-    
-  }
-
-  #table_div{
-    width: 50%;
-    justify-content: center;
-    align-items: center;
-  }
-
-  aside {
-    width: 30%;
-   
-    padding: 15px;
-    /* margin-left: 15px; */
-    float: right;
-    font-style: italic;
-    background-color: lightgray;
-  }
-  table {
-    table-layout: fixed;
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #ddd;
-  }
-
-  table thead {
-    background-color: aquamarine;
-    padding: 5px;
-  }
-
-  thead th {
-    border-right: 1px solid #ddd;
-  }
-  tbody td {
-    padding: 5px;
-    border: 1px solid #ddd;
-  }
-
-  #diagram {
-    align-items: center;
-    border-radius: 20px;
-    border: 1px solid gray;
-    margin-bottom: 10px;
-  }
- 
-
-  #footer-div {
-    padding: 10px;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    background-color: navy;
-  }
-  footer p,
-  a {
-    font-weight: bold;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color: #ddd;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 20px;
+}
+header {
+  background: navy;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+nav {
+  margin-top: 10px;
+}
+h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+h2, h3, h4 {
+  color: navy;
+  margin-bottom: 10px;
+}
+p {
+  margin-bottom: 15px;
+  text-align: justify;
+}
+section {
+  margin-bottom: 40px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+#second-section, #HTTP {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+article, aside {
+  flex: 1;
+  min-width: 250px;
+}
+aside {
+  background: #f0f0f0;
+  padding: 15px;
+  border-radius: 8px;
+  font-style: italic;
+}
+ul {
+  padding-left: 20px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+thead {
+  background-color: #007BFF;
+  color: white;
+}
+table, th, td {
+  border: 1px solid #ddd;
+}
+th, td {
+  padding: 10px;
+  text-align: center;
+}
+#diagram img {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+footer {
+  margin-top: 30px;
+  background: navy;
+  color: #ddd;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+}
+footer a {
+  color: #ffcc00;
+  text-decoration: none;
+  font-weight: bold;
+}
+footer a:hover {
+  text-decoration: underline;
+}

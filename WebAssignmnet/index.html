@@ -1,145 +1,111 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width = device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <title>How Internet Works</title>
-  </head>
-  <body>
-    <header>
-      <h1>Understanding Client & Server Communication</h1>
-      <nav></nav>
-    </header>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How the Internet Works</title>
+</head>
+<body>
 
-    <section>
-      <h2>Client & Server Communication</h2>
-      <p>
-        In an Operating System, <strong> Server Communication</strong> refers to
-        the exchange of data and Services among multiple machines or processes.
-        In Client client-server communication System one process or machine acts
-        as a client requesting a service or data, and Another machine or process
-        acts like a server for providing those Services or Data to the client
-        machine. This Communication model is widely used for exchanging data
-        among various computing environments like
-        <strong
-          >Systems, Internet Applications, and Networking Application
-          communication</strong
-        >. The communication between Server and Client takes place with
-        different Protocols and mechanisms.
-      </p>
-    </section>
-    <section id="second-section">
-      <article>
-        <h3>The Journey of the Web Request</h3>
-        <p>
-          <em>A Web request</em>, starting with a user entering a URL, travels
-          from the client (browser) to a server, and then back. This journey
-          involves DNS resolution, TCP connection establishment, HTTP
-          request/response, and potentially TLS encryption if HTTPS is used.
-        </p>
-      </article>
-      <aside>
-        <h4>Quick Facts</h4>
-        <p>
-          <b>HTTP</b> is the protocol used for communication between clients and
-          server
-        </p>
-      </aside>
-    </section>
+<header>
+  <h1>Understanding Client & Server Communication</h1>
+  <nav>
+    <p>Learn how the internet works behind the scenes!</p>
+  </nav>
+</header>
 
-    <section id="HTTP">
-      <div>
-        <h3>What is HTTP?</h3>
+<section>
+  <h2>Client & Server Communication</h2>
+  <p>
+    In an operating system, <strong>Server Communication</strong> refers to the exchange of data and services among multiple machines or processes.
+    In a client-server communication system, one machine acts as a client requesting services or data, while another acts as a server providing them.
+    This model is widely used across systems, internet applications, and networking communication, using various protocols and mechanisms.
+  </p>
+</section>
 
-        <p>
-          <em>The Hypertext Transfer Protocol (HTTP)</em> is designed to enable
-          communications between clients and servers HTTP works as a
-          request-response protocol between a client and server.
-        </p>
-      </div>
+<section id="second-section">
+  <article>
+    <h3>The Journey of a Web Request</h3>
+    <p>
+      A <em>web request</em> starts when a user enters a URL. It travels from the client (browser) to the server and returns the desired response.
+      This journey involves DNS resolution, TCP connection, HTTP request/response cycles, and sometimes encryption via HTTPS (TLS).
+    </p>
+  </article>
 
-      <aside>
-        <div>
-          <h4>HTTP Methods</h4>
-        <ul style="padding-left: 12px;">
-          <li>GET</li>
-          <li>POST</li>
-          <li>PUT</li>
-          <li>HEAD</li>
-          <li>DELETE</li>
-        </ul>
-        </div>
-        
-      </aside>
-    </section>
+  <aside>
+    <h4>Quick Facts</h4>
+    <p><strong>HTTP</strong> is the protocol that governs communication between clients and servers.</p>
+  </aside>
+</section>
 
-    <section id="client_vs_sever">
-      <div id="table_div">
-        <div>
-          <h3>Difference between Client and Server</h3>
-  
-          <p>
-            The following table highlights the major differences between Client
-            and Server ?
-          </p>
-        </div>
-  
-        <table>
-          <thead>
-            <tr>
-              <th>Characteristics</th>
-              <th>Client</th>
-              <th>Server</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Definition</td>
-              <td>
-                A computer device which asks a server for services is known as a
-                customer.
-              </td>
-              <td>
-                A server offers services to other devices connected to a network.
-              </td>
-            </tr>
-            <tr>
-              <td>Support of Login</td>
-              <td>Clients support the login of single users.</td>
-              <td>Servers support multiple user login</td>
-            </tr>
-            <tr>
-              <td>Tasks</td>
-              <td>The task mainly includes the requesting services.</td>
-              <td>
-                The tasks are more complex in the server when we compare to a
-                client.
-              </td>
-            </tr>
-            <tr></tr>
-          </tbody>
-        </table>
-      </div>
-      
-    </section>
+<section id="HTTP">
+  <div>
+    <h3>What is HTTP?</h3>
+    <p>
+      <em>Hypertext Transfer Protocol (HTTP)</em> is a request-response protocol used by web browsers (clients) and web servers.
+      It defines how messages are formatted and transmitted, and how servers and browsers should respond to various commands.
+    </p>
+  </div>
 
-    <section id="diagram">
-      <img
-        alt="Client Server Communication in Operating System"
-        src="https://media.geeksforgeeks.org/wp-content/uploads/20231104123859/Socket-Communication-min.png"
-      />
-    </section>
+  <aside>
+    <h4>Common HTTP Methods</h4>
+    <ul>
+      <li>GET</li>
+      <li>POST</li>
+      <li>PUT</li>
+      <li>HEAD</li>
+      <li>DELETE</li>
+    </ul>
+  </aside>
+</section>
 
-    <footer>
-      <div id="footer-div">
-        <p>Author: Imran Jaleel</p>
-        <p>
-          <a href="mailto:imranjaleel2331@gmail.com"
-            >imranjaleel2331@gmail.com</a
-          >
-        </p>
-      </div>
-    </footer>
-  </body>
+<section id="client_vs_server">
+  <h3>Differences Between Client and Server</h3>
+  <p>The table below highlights key differences between clients and servers:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Characteristic</th>
+        <th>Client</th>
+        <th>Server</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Definition</td>
+        <td>Requests services or resources from a server.</td>
+        <td>Provides services or resources to clients.</td>
+      </tr>
+      <tr>
+        <td>Login Support</td>
+        <td>Typically supports a single user's login.</td>
+        <td>Handles multiple users simultaneously.</td>
+      </tr>
+      <tr>
+        <td>Tasks</td>
+        <td>Primarily requests and utilizes services.</td>
+        <td>Manages complex operations and services.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="diagram">
+  <h3>Visual Representation</h3>
+  <img
+    src="https://media.geeksforgeeks.org/wp-content/uploads/20231104123859/Socket-Communication-min.png"
+    alt="Client-Server Communication Diagram"
+  />
+</section>
+
+<footer>
+  <p>Author: Imran Jaleel</p>
+  <p>
+    Contact: 
+    <a href="mailto:imranjaleel2331@gmail.com">imranjaleel2331@gmail.com</a>
+  </p>
+</footer>
+
+</body>
 </html>

@@ -1,0 +1,103 @@
+* {
+    padding: 0%;
+  }
+  h1 {
+    color: navy;
+    font-size: 28px;
+    background-color: #f0f0f0;
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
+  }
+  h2 {
+    color: navy;
+    font-size: 24px;
+    font-family: "Times New Roman", Times, serif;
+  }
+
+  h3 {
+    color: navy;
+    font-size: 24px;
+    font-family: "Times New Roman", Times, serif;
+  }
+
+  p {
+    font-size: 15;
+    text-align: justify;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  #second-section {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+  }
+
+  #HTTP {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+  }
+  #client_vs_sever {
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 20px;
+    
+  }
+
+  #table_div{
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  aside {
+    width: 30%;
+   
+    padding: 15px;
+    /* margin-left: 15px; */
+    float: right;
+    font-style: italic;
+    background-color: lightgray;
+  }
+  table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+  }
+
+  table thead {
+    background-color: aquamarine;
+    padding: 5px;
+  }
+
+  thead th {
+    border-right: 1px solid #ddd;
+  }
+  tbody td {
+    padding: 5px;
+    border: 1px solid #ddd;
+  }
+
+  #diagram {
+    align-items: center;
+    border-radius: 20px;
+    border: 1px solid gray;
+    margin-bottom: 10px;
+  }
+ 
+
+  #footer-div {
+    padding: 10px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: navy;
+  }
+  footer p,
+  a {
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #ddd;
+  }

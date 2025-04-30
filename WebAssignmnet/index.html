@@ -2,19 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <link rel="stylesheet" href="styles.css"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>How the Internet Works</title>
 </head>
 <body>
 
-<header>
+<header >
   <h1>Understanding Client & Server Communication</h1>
   <nav>
-    <p>Learn how the internet works behind the scenes!</p>
+    <button  onclick="scrollToHome()" id="scrollToTop">Home</button>
+    <button  onclick="scrollToSection()" id="scrollToSection">Explanation</button>
+    <button onclick="scrollToFooter()" id="scrollToFooter">About</button>
+
   </nav>
 </header>
 
-<section>
+<section id="header">
   <h2>Client & Server Communication</h2>
   <p>
     In an operating system, <strong>Server Communication</strong> refers to the exchange of data and services among multiple machines or processes.
@@ -99,13 +103,29 @@
   />
 </section>
 
-<footer>
-  <p>Author: Imran Jaleel</p>
-  <p>
-    Contact: 
-    <a href="mailto:imranjaleel2331@gmail.com">imranjaleel2331@gmail.com</a>
-  </p>
+<footer id="footer">
+  <div>
+    <p>Quick Links</p>
+    <ul>
+      <li>Landing</li>
+      <li>Landing</li>
+      <li>Landing</li>
+    </ul>
+  </div>
+  <div>
+    <p>Contact & Legal</p>
+    <ul>
+      <li>Landing</li>
+      <li>Landing</li>
+      <li>Landing</li>
+    </ul>
+  </div>
+  <div>
+    <p style=" flex-wrap: wrap;  width: 100;">Join the Conversation - Lets Connect!!  </p>
+  
+   
+  </div>
 </footer>
-
+<script src="script.js"></script>
 </body>
 </html>

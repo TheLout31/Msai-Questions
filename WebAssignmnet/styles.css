@@ -171,14 +171,22 @@ th, td {
   }
 
   #footer {
-    
     flex-wrap: wrap;
-    justify-content: space-between;
-   
+    justify-content: center;
     background-color: #1e1e1e;
     color: #fff;
     background-color: navy;
     padding: 40px 20px;
     font-family: Arial, sans-serif;
+    
+  }
+  h1 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  h2, h3, h4 {
+    font-size: 20px;
+    color: navy;
+    margin-bottom: 10px;
   }
 }

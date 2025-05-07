@@ -21,6 +21,8 @@
       }
 
       .header {
+        position: sticky;
+        top: 0%;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -28,36 +30,45 @@
         max-height: 80px;
         padding: 20px;
         background-color: #333;
-        
       }
 
-    
-
-      .header h1{
+      .header h1 {
         color: white;
-        font-family: 'Times New Roman', Times, serif;
+        font-family: "Times New Roman", Times, serif;
       }
 
       .main-content {
-        display: flex;
-        flex-direction: row;
+        gap: 10px;
         
+        display: grid;
+        grid-template-columns: 1fr;
         padding: 20px;
-        margin-top: 20px; 
-        flex: 1;
+        margin-top: 20px;
       }
 
       .left {
-       
+        border: 0.5px solid beige;
+        border-radius: 20px;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
         padding: 20px;
-        width: 70%;
       }
-
-      .right {
+      .right-container {
         position: sticky;
         top: 0%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        height: 100%;
+      }
+
+      .right1,
+      .right2 {
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        border: 0.5px solid beige;
+        border-radius: 20px;
+        
         padding: 20px;
-        width: 30%;
+        flex: 1; /* Equal vertical space */
       }
 
       footer {
@@ -84,17 +95,28 @@
       }
 
       a {
-        font-family: 'Times New Roman', Times, serif;
+        font-family: "Times New Roman", Times, serif;
         color: lightblue;
         text-decoration: none;
       }
+
+      @media only screen and (max-width: 375px) {
+        .main-content {
+        gap: 10px;
+        display: grid;
+        grid-template-rows: 50% 20% 20%;
+        padding: 20px;
+        margin-top: 20px;
+      }
+  }
+
     </style>
   </head>
   <body>
     <header class="header">
       <div>
         <h1>Global Daily News</h1>
-    </div>
+      </div>
     </header>
 
     <section class="main-content">
@@ -102,96 +124,128 @@
         <div class="news-article">
           <h2>India Launches New Space Mission</h2>
           <p>
-            The Indian Space Research Organisation (ISRO) successfully launched its new satellite from Sriharikota today, aiming to enhance communication capabilities across the country.
+            The Indian Space Research Organisation (ISRO) successfully launched
+            its new satellite from Sriharikota today, aiming to enhance
+            communication capabilities across the country.
           </p>
         </div>
         <div class="news-article">
           <h2>Global Markets React to Oil Prices Surge</h2>
           <p>
-            Stock markets around the world saw significant fluctuations as crude oil prices hit a 2-year high, raising concerns about inflation and energy costs.
+            Stock markets around the world saw significant fluctuations as crude
+            oil prices hit a 2-year high, raising concerns about inflation and
+            energy costs.
           </p>
         </div>
         <div class="news-article">
           <h2>New AI Model Sets Benchmark in Language Understanding</h2>
           <p>
-            A breakthrough in AI research was announced as scientists unveiled a new model capable of multi-lingual reasoning with near-human accuracy.
+            A breakthrough in AI research was announced as scientists unveiled a
+            new model capable of multi-lingual reasoning with near-human
+            accuracy.
           </p>
         </div>
 
         <div class="news-article">
-            <h2>India Launches New Space Mission</h2>
-            <p>
-              The Indian Space Research Organisation (ISRO) successfully launched its new satellite from Sriharikota today, aiming to enhance communication capabilities across the country.
-            </p>
-          </div>
-          <div class="news-article">
-            <h2>Global Markets React to Oil Prices Surge</h2>
-            <p>
-              Stock markets around the world saw significant fluctuations as crude oil prices hit a 2-year high, raising concerns about inflation and energy costs.
-            </p>
-          </div>
-          <div class="news-article">
-            <h2>New AI Model Sets Benchmark in Language Understanding</h2>
-            <p>
-              A breakthrough in AI research was announced as scientists unveiled a new model capable of multi-lingual reasoning with near-human accuracy.
-            </p>
-          </div>
+          <h2>India Launches New Space Mission</h2>
+          <p>
+            The Indian Space Research Organisation (ISRO) successfully launched
+            its new satellite from Sriharikota today, aiming to enhance
+            communication capabilities across the country.
+          </p>
+        </div>
+        <div class="news-article">
+          <h2>Global Markets React to Oil Prices Surge</h2>
+          <p>
+            Stock markets around the world saw significant fluctuations as crude
+            oil prices hit a 2-year high, raising concerns about inflation and
+            energy costs.
+          </p>
+        </div>
+        <div class="news-article">
+          <h2>New AI Model Sets Benchmark in Language Understanding</h2>
+          <p>
+            A breakthrough in AI research was announced as scientists unveiled a
+            new model capable of multi-lingual reasoning with near-human
+            accuracy.
+          </p>
+        </div>
 
-          <div class="news-article">
-            <h2>India Launches New Space Mission</h2>
-            <p>
-              The Indian Space Research Organisation (ISRO) successfully launched its new satellite from Sriharikota today, aiming to enhance communication capabilities across the country.
-            </p>
-          </div>
-          <div class="news-article">
-            <h2>Global Markets React to Oil Prices Surge</h2>
-            <p>
-              Stock markets around the world saw significant fluctuations as crude oil prices hit a 2-year high, raising concerns about inflation and energy costs.
-            </p>
-          </div>
-          <div class="news-article">
-            <h2>New AI Model Sets Benchmark in Language Understanding</h2>
-            <p>
-              A breakthrough in AI research was announced as scientists unveiled a new model capable of multi-lingual reasoning with near-human accuracy.
-            </p>
-          </div>
+        <div class="news-article">
+          <h2>India Launches New Space Mission</h2>
+          <p>
+            The Indian Space Research Organisation (ISRO) successfully launched
+            its new satellite from Sriharikota today, aiming to enhance
+            communication capabilities across the country.
+          </p>
+        </div>
+        <div class="news-article">
+          <h2>Global Markets React to Oil Prices Surge</h2>
+          <p>
+            Stock markets around the world saw significant fluctuations as crude
+            oil prices hit a 2-year high, raising concerns about inflation and
+            energy costs.
+          </p>
+        </div>
+        <div class="news-article">
+          <h2>New AI Model Sets Benchmark in Language Understanding</h2>
+          <p>
+            A breakthrough in AI research was announced as scientists unveiled a
+            new model capable of multi-lingual reasoning with near-human
+            accuracy.
+          </p>
+        </div>
 
-          <div class="news-article">
-            <h2>India Launches New Space Mission</h2>
-            <p>
-              The Indian Space Research Organisation (ISRO) successfully launched its new satellite from Sriharikota today, aiming to enhance communication capabilities across the country.
-            </p>
-          </div>
-          <div class="news-article">
-            <h2>Global Markets React to Oil Prices Surge</h2>
-            <p>
-              Stock markets around the world saw significant fluctuations as crude oil prices hit a 2-year high, raising concerns about inflation and energy costs.
-            </p>
-          </div>
-          <div class="news-article">
-            <h2>New AI Model Sets Benchmark in Language Understanding</h2>
-            <p>
-              A breakthrough in AI research was announced as scientists unveiled a new model capable of multi-lingual reasoning with near-human accuracy.
-            </p>
-          </div>
+        <div class="news-article">
+          <h2>India Launches New Space Mission</h2>
+          <p>
+            The Indian Space Research Organisation (ISRO) successfully launched
+            its new satellite from Sriharikota today, aiming to enhance
+            communication capabilities across the country.
+          </p>
+        </div>
+        <div class="news-article">
+          <h2>Global Markets React to Oil Prices Surge</h2>
+          <p>
+            Stock markets around the world saw significant fluctuations as crude
+            oil prices hit a 2-year high, raising concerns about inflation and
+            energy costs.
+          </p>
+        </div>
+        <div class="news-article">
+          <h2>New AI Model Sets Benchmark in Language Understanding</h2>
+          <p>
+            A breakthrough in AI research was announced as scientists unveiled a
+            new model capable of multi-lingual reasoning with near-human
+            accuracy.
+          </p>
+        </div>
       </div>
-
-      <div class="right">
-        <h3>Top Headlines</h3>
-        <ul>
-          <li>Sports: India wins Asia Cup</li>
-          <li>Tech: New iPhone launch expected next week</li>
-          <li>Health: New COVID variant under observation</li>
-        </ul>
+      <div class="right-container">
+        <div class="right1">
+          <h3>Top Headlines</h3>
+          <ul>
+            <li>Sports: India wins Asia Cup</li>
+            <li>Tech: New iPhone launch expected next week</li>
+            <li>Health: New COVID variant under observation</li>
+          </ul>
+        </div>
+        <div class="right2">
+          <h3>Top Headlines</h3>
+          <ul>
+            <li>Sports: India wins Asia Cup</li>
+            <li>Tech: New iPhone launch expected next week</li>
+            <li>Health: New COVID variant under observation</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <footer>
       <p>&copy; 2025 Global Daily News. All rights reserved.</p>
       <p>Contact us at: contact@globaldailynews.com</p>
-      <p>Follow us on 
-        <a href="#">Twitter</a>, 
-        <a href="#">Facebook</a>, 
+      <p>
+        Follow us on <a href="#">Twitter</a>, <a href="#">Facebook</a>,
         <a href="#">Instagram</a>
       </p>
     </footer>

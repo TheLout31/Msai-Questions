@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clothing Website Navbar</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background-color: #fff;
+      padding: 15px 40px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #111;
+      margin-right: 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #e60023;
+    }
+
+    .search-bar {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      margin: 0 30px;
+    }
+
+    .search-bar input {
+      width: 60%;
+      padding: 8px 15px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+
+    .express-btn {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .express-btn:hover {
+      background-color: darkred;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .search-bar {
+        order: 3;
+        width: 100%;
+        margin: 15px 0;
+      }
+
+      .search-bar input {
+        width: 90%;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Rebook</div>
+    
+    <div class="nav-links">
+      <a href="#">Men</a>
+      <a href="#">Women</a>
+      <a href="#">Special</a>
+      <a href="#">New</a>
+      <a href="#">Sports</a>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Search for products...">
+    </div>
+
+    <button class="express-btn">Express Delivery</button>
+  </nav>
+
+</body>
+</html>

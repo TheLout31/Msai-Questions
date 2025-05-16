@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Product Search</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        color: #fff;
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      h1 {
+        margin-bottom: 30px;
+        font-size: 2rem;
+      }
+
+      .search-container {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 800px;
+        justify-content: center;
+      }
+
+      #search-input, #sort-select {
+        padding: 10px 14px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+      }
+
+      #sort-select {
+        background-color: #fff;
+        color: #333;
+      }
+
+      #search-button {
+        padding: 10px 20px;
+        background-image: linear-gradient(90deg, #0072ff, #00c6ff);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      #search-button:hover {
+        background-image: linear-gradient(90deg, #005ecb, #00a7d8);
+      }
+
+      #search-results {
+        margin-bottom: 20px;
+        font-size: 18px;
+        color: #fffb;
+      }
+
+      #list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        width: 100%;
+        max-width: 1000px;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: transform 0.2s ease;
+      }
+
+      .card:hover {
+        transform: scale(1.03);
+      }
+
+      .card h3 {
+        margin-bottom: 10px;
+        color: #fff;
+      }
+
+      .card p {
+        margin-bottom: 6px;
+        color: #ddd;
+        font-size: 14px;
+      }
+
+      .price {
+        font-weight: bold;
+        color: #00c6ff;
+      }
+
+      .category {
+        font-style: italic;
+        color: #aaa;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Search Products</h1>
+    <div class="search-container">
+      <input type="search" id="search-input" placeholder="Search for a product..." />
+      <select id="sort-select">
+        <option value="">Sort by Price</option>
+        <option value="asc">Price: Low to High</option>
+        <option value="desc">Price: High to Low</option>
+      </select>
+      <button id="search-button">Search</button>
+    </div>
+    <div id="search-results"></div>
+    <div id="list"></div>
+
+    <script>
+      const searchInput = document.getElementById("search-input");
+      const searchButton = document.getElementById("search-button");
+      const searchResults = document.getElementById("search-results");
+      const list = document.getElementById("list");
+      const sortSelect = document.getElementById("sort-select");
+
+      let allProducts = [];
+
+      const renderProducts = (products) => {
+        list.innerHTML = "";
+
+        if (products.length === 0) {
+          list.innerHTML = "<p>No products found.</p>";
+          return;
+        }
+
+        products.forEach((item) => {
+          const card = document.createElement("div");
+          card.className = "card";
+
+          card.innerHTML = `
+            <h3>${item.title}</h3>
+            <p>${item.description}</p>
+            <p class="price">Price: $${item.price}</p>
+            <p class="category">Category: ${item.category}</p>
+          `;
+
+          list.appendChild(card);
+        });
+      };
+
+      const applyFiltersAndSort = () => {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        const sortValue = sortSelect.value;
+
+        let filtered = allProducts.filter(product =>
+          product.title.toLowerCase().includes(searchTerm)
+        );
+
+        if (sortValue === "asc") {
+          filtered.sort((a, b) => a.price - b.price);
+        } else if (sortValue === "desc") {
+          filtered.sort((a, b) => b.price - a.price);
+        }
+
+        renderProducts(filtered);
+        searchResults.innerHTML = searchTerm ? `Showing results for: <strong>${searchTerm}</strong>` : "";
+      };
+
+      const fetchedData = async () => {
+        try {
+          const res = await fetch("https://dummyjson.com/products");
+          const data = await res.json();
+          allProducts = data.products;
+          applyFiltersAndSort();
+        } catch (error) {
+          console.error("Error:", error);
+          list.innerHTML = "<p>Failed to load products. Try again later.</p>";
+        }
+      };
+
+      fetchedData();
+
+      searchButton.addEventListener("click", applyFiltersAndSort);
+      sortSelect.addEventListener("change", applyFiltersAndSort);
+    </script>
+  </body>
+</html>

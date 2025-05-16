@@ -1,161 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Preferences Form</title>
-  <style>
-    /* Reset + Fonts */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body.light {
-      background-color: #f4f4f4;
-      color: #333;
-    }
-
-    body.dark {
-      background-color: #1e1e1e;
-      color: #f9f9f9;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-      padding: 40px 20px;
-      transition: background-color 0.4s ease, color 0.4s ease;
-    }
-
-    h1 {
-      margin-bottom: 30px;
-      font-size: 2.2rem;
-      font-weight: 600;
-    }
-
-    form {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(6px);
-      padding: 25px 30px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-    }
-
-    label {
-      font-weight: 500;
-      margin-bottom: 4px;
-    }
-
-    select {
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      transition: border-color 0.3s;
-    }
-
-    select:focus {
-      outline: none;
-      border-color: #4a90e2;
-    }
-
-    button {
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      background-color: #4a90e2;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #357ab7;
-    }
-
-    #clearPreferences {
-      margin-top: 20px;
-      background-color: #e74c3c;
-    }
-
-    #clearPreferences:hover {
-      background-color: #c0392b;
-    }
-  </style>
-</head>
-<body>
-  <h1>Preferences</h1>
-
-  <form id="preferencesForm">
-    <div>
-      <label for="theme">Theme:</label>
-      <select id="theme">
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
-    </div>
-
-    <div>
-      <label for="language">Language:</label>
-      <select id="language">
-        <option value="en">English</option>
-        <option value="es">Spanish</option>
-      </select>
-    </div>
-
-    <button type="submit">Save Preferences</button>
-  </form>
-
-  <button id="clearPreferences">Clear Preferences</button>
-
-  <script>
-    const selectTheme = document.getElementById("theme");
-    const selectLanguage = document.getElementById("language");
-    const preferencesForm = document.getElementById("preferencesForm");
-    const clearPreferencesButton = document.getElementById("clearPreferences");
-
-    window.addEventListener("DOMContentLoaded", function () {
-      const savedData = JSON.parse(localStorage.getItem("preference"));
-      if (savedData) {
-        document.body.className = savedData.theme;
-        selectTheme.value = savedData.theme;
-        selectLanguage.value = savedData.language;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Preferences Form</title>
+    <style>
+      /* Reset + Fonts */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
-    });
 
-    preferencesForm.addEventListener("submit", (event) => {
-      event.preventDefault();
+      body.light {
+        background-color: #f4f4f4;
+        color: #333;
+      }
 
-      const preferences = {
-        theme: selectTheme.value,
-        language: selectLanguage.value,
+      body.dark {
+        background-color: #1e1e1e;
+        color: #f9f9f9;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        /* min-height: 100vh; */
+        padding: 40px 20px;
+        transition: background-color 0.4s ease, color 0.4s ease;
+      }
+
+      h1 {
+        margin-bottom: 30px;
+        font-size: 2.2rem;
+        font-weight: 600;
+      }
+
+      form {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(6px);
+        padding: 25px 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        font-weight: 500;
+        margin-bottom: 4px;
+      }
+
+      select {
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        transition: border-color 0.3s;
+      }
+
+      select:focus {
+        outline: none;
+        border-color: #4a90e2;
+      }
+
+      button {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        background-color: #4a90e2;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #357ab7;
+      }
+
+      #clearPreferences {
+        margin-top: 20px;
+        background-color: #e74c3c;
+      }
+
+      #clearPreferences:hover {
+        background-color: #c0392b;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Preferences</h1>
+
+    <form id="preferencesForm">
+      <div>
+        <label for="theme">Theme:</label>
+        <select id="theme">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="language">Language:</label>
+        <select id="language">
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+        </select>
+      </div>
+
+      <button type="submit">Save Preferences</button>
+    </form>
+
+    <button id="clearPreferences">Clear Preferences</button>
+
+    <ul id="list"></ul>
+
+    <script>
+      const selectTheme = document.getElementById("theme");
+      const selectLanguage = document.getElementById("language");
+      const preferencesForm = document.getElementById("preferencesForm");
+      const clearPreferencesButton =
+        document.getElementById("clearPreferences");
+
+      window.addEventListener("DOMContentLoaded", function () {
+        const savedData = JSON.parse(localStorage.getItem("preference"));
+        if (savedData) {
+          document.body.className = savedData.theme;
+          selectTheme.value = savedData.theme;
+          selectLanguage.value = savedData.language;
+        }
+      });
+
+      preferencesForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const preferences = {
+          theme: selectTheme.value,
+          language: selectLanguage.value,
+        };
+
+        localStorage.setItem("preference", JSON.stringify(preferences));
+        document.body.className = preferences.theme;
+      });
+
+      clearPreferencesButton.addEventListener("click", () => {
+        localStorage.clear();
+        document.body.className = "";
+        alert("Preferences cleared!");
+      });
+
+      localStorage.setItem("isLoggedIn", "true");
+      console.log(typeof localStorage.getItem("isLoggedIn")); 
+
+      const fetchedData = async () => {
+        try {
+          let res = await fetch("https://jsonplaceholder.typicode.com/posts");
+          let data = await res.json();
+          const list = document.getElementById("list");
+          data.forEach((item) => {
+            const li = document.createElement("li");
+
+            (li.textContent = item.title), list.appendChild(li);
+          });
+        } catch (error) {
+          console.error("Error:", error);
+        }
       };
 
-      localStorage.setItem("preference", JSON.stringify(preferences));
-      document.body.className = preferences.theme;
-    });
 
-    clearPreferencesButton.addEventListener("click", () => {
-      localStorage.clear();
-      document.body.className = '';
-      alert("Preferences cleared!");
-    });
-
-    localStorage.setItem("isLoggedIn", "true");
-console.log(typeof localStorage.getItem("isLoggedIn"));
-  </script>
-</body>
+    </script>
+  </body>
 </html>

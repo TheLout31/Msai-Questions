@@ -13,12 +13,23 @@
       body {
         font-family: Arial, sans-serif;
       }
+      body.light {
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    body.dark{
+      background-color: #1e1e1e;
+      color: #f9f9f9;
+    }
+    
+    
 
       nav {
         display: flex;
         align-items: center;
         justify-content: space-around;
-        background-color: #fff;
+        
         padding: 15px 40px;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         position: sticky;
@@ -30,7 +41,7 @@
       .logo {
         font-size: 24px;
         font-weight: bold;
-        color: #111;
+       
         margin-right: 20px;
       }
 
@@ -41,7 +52,7 @@
 
       .nav-links a {
         text-decoration: none;
-        color: #333;
+        
         font-size: 16px;
         transition: color 0.3s ease;
       }
@@ -58,7 +69,7 @@
       }
 
       .search-bar input {
-        width: 60%;
+        width: 40%;
         padding: 8px 15px;
         border: 1px solid #ccc;
         border-radius: 20px;
@@ -74,6 +85,7 @@
         font-weight: bold;
         cursor: pointer;
         transition: background 0.3s ease;
+        margin-right: 10px;
       }
 
       /* Original button style is already defined */
@@ -160,6 +172,58 @@
           rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
         transition: 0.5 ease-in-out;
       }
+
+      .switch {
+        font-size: 17px;
+        position: relative;
+        display: inline-block;
+        width: 3.5em;
+        height: 2em;
+      }
+
+      /* Hide default HTML checkbox */
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      /* The slider */
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        inset: 0;
+        background: #9fccfa;
+        border-radius: 50px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 2em;
+        width: 2em;
+        inset: 0;
+        background-color: white;
+        border-radius: 50px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .switch input:checked + .slider {
+        background: #0974f1;
+      }
+
+      .switch input:focus + .slider {
+        box-shadow: 0 0 1px #0974f1;
+      }
+
+      .switch input:checked + .slider:before {
+        transform: translateX(1.6em);
+      }
     </style>
   </head>
   <body>
@@ -175,10 +239,22 @@
       </div>
 
       <div class="search-bar">
-        <input type="text" placeholder="Search for products..." />
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Search for products..."
+        />
       </div>
 
-      <button id="express-btn">Express Delivery</button>
+      <div>
+        <button id="express-btn">Express Delivery</button>
+      </div>
+      <div>
+        <label class="switch">
+          <input type="checkbox" id="themeToggle" />
+          <span class="slider"></span>
+        </label>
+      </div>
     </nav>
 
     <div id="banner">
@@ -228,7 +304,8 @@
       const leftBtn = document.querySelector(".nav-button.left-button");
       const rightBtn = document.querySelector(".nav-button.right-button");
       const bannerImg = document.getElementById("banner-img");
-
+      const inputSearch = document.getElementById("search-input");
+      const toggleTheme = document.getElementById("themeToggle");
       const images = [
         "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop",
         "https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -236,6 +313,8 @@
       ];
 
       let currentIndex = 0;
+
+      inputSearch.addEventListener("keypress", (input) => {});
 
       function changeImage(index) {
         bannerImg.style.opacity = 0; // Start fade-out
@@ -250,7 +329,7 @@
 
       express.addEventListener("click", () => {
         express.textContent = "Track Order";
-        
+
         express.classList.remove("express-btn"); // if you added such a class
         express.classList.add("changed-btn");
 
@@ -270,6 +349,20 @@
       rightBtn.addEventListener("click", function () {
         currentIndex = (currentIndex + 1) % images.length;
         changeImage(currentIndex);
+      });
+
+       window.addEventListener("DOMContentLoaded", function () {
+      const savedTheme = localStorage.getItem("theme") || "light";
+      document.body.className = savedTheme;
+       
+      toggleTheme.checked = savedTheme === "dark";
+    });
+
+      toggleTheme.addEventListener("change", function () {
+        const newTheme = toggleTheme.checked ? "dark" : "light";
+        document.body.className = newTheme;
+        
+        localStorage.setItem("theme", newTheme);
       });
     </script>
   </body>

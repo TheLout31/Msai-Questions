@@ -2,14 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Search</title>
     <style>
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
 
       body {
@@ -37,7 +37,9 @@
         justify-content: center;
       }
 
-      #search-input, #sort-select {
+      #search-input,
+      #sort-select,
+      #sort-Category {
         padding: 10px 14px;
         border: none;
         border-radius: 8px;
@@ -45,7 +47,8 @@
         outline: none;
       }
 
-      #sort-select {
+      #sort-select,
+      #sort-Category {
         background-color: #fff;
         color: #333;
       }
@@ -117,11 +120,22 @@
   <body>
     <h1>Search Products</h1>
     <div class="search-container">
-      <input type="search" id="search-input" placeholder="Search for a product..." />
+      <input
+        type="search"
+        id="search-input"
+        placeholder="Search for a product..."
+      />
       <select id="sort-select">
         <option value="">Sort by Price</option>
         <option value="asc">Price: Low to High</option>
         <option value="desc">Price: High to Low</option>
+      </select>
+      <select id="sort-Category">
+        <option value="">Sort by Category</option>
+        <option value="beauty">Beauty</option>
+        <option value="fragrances">Fragrances</option>
+        <option value="groceries">Groceries</option>
+        <option value="furniture">Furniture</option>
       </select>
       <button id="search-button">Search</button>
     </div>
@@ -134,6 +148,7 @@
       const searchResults = document.getElementById("search-results");
       const list = document.getElementById("list");
       const sortSelect = document.getElementById("sort-select");
+      const sortCategory = document.getElementById("sort-Category");
 
       let allProducts = [];
 
@@ -162,11 +177,18 @@
 
       const applyFiltersAndSort = () => {
         const searchTerm = searchInput.value.trim().toLowerCase();
+        const selectedCategory = sortCategory.value;
         const sortValue = sortSelect.value;
 
-        let filtered = allProducts.filter(product =>
+        let filtered = allProducts.filter((product) =>
           product.title.toLowerCase().includes(searchTerm)
         );
+
+        if (selectedCategory) {
+          filtered = filtered.filter(
+            (product) => product.category.toLowerCase() === selectedCategory
+          );
+        }
 
         if (sortValue === "asc") {
           filtered.sort((a, b) => a.price - b.price);
@@ -175,7 +197,10 @@
         }
 
         renderProducts(filtered);
-        searchResults.innerHTML = searchTerm ? `Showing results for: <strong>${searchTerm}</strong>` : "";
+
+        searchResults.innerHTML = searchTerm
+          ? `Showing results for: <strong>${searchTerm}</strong>`
+          : "";
       };
 
       const fetchedData = async () => {
@@ -183,6 +208,7 @@
           const res = await fetch("https://dummyjson.com/products");
           const data = await res.json();
           allProducts = data.products;
+
           applyFiltersAndSort();
         } catch (error) {
           console.error("Error:", error);
@@ -194,6 +220,7 @@
 
       searchButton.addEventListener("click", applyFiltersAndSort);
       sortSelect.addEventListener("change", applyFiltersAndSort);
+      sortCategory.addEventListener("change", applyFiltersAndSort);
     </script>
   </body>
 </html>

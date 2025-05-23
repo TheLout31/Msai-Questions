@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Firebase User Management</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f7fa;
+        color: #333;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #2c3e50;
+      }
+
+      #searchInput {
+        width: 100%;
+        max-width: 400px;
+        padding: 12px;
+        margin: 0 auto 20px auto;
+        display: block;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
+      }
+
+      #userList {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 20px;
+      }
+
+      .user {
+        background-color: #ffffff;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+      }
+
+      .user:hover {
+        transform: translateY(-3px);
+      }
+
+      .user strong {
+        font-size: 18px;
+        color: #34495e;
+      }
+
+      .deleteBtn {
+        align-items: center;
+        background-color: #ffe7e7;
+        background-position: 0 0;
+        border: 1px solid #fee0e0;
+        border-radius: 11px;
+        box-sizing: border-box;
+        color: #d33a2c;
+        cursor: pointer;
+        display: flex;
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 33.4929px;
+        list-style: outside
+          url(https://www.smashingmagazine.com/images/bullet.svg) none;
+        padding: 2px 12px;
+        text-align: left;
+        text-decoration: none;
+        text-shadow: none;
+        text-underline-offset: 1px;
+        transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        word-break: break-word;
+      }
+
+      #paginationButtons {
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      #paginationButtons button {
+        background-color: #3498db;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        margin: 5px;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      #paginationButtons button:hover {
+        background-color: #2980b9;
+      }
+
+      #paginationButtons button:disabled {
+        background-color: #bdc3c7;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Firebase User Management</h1>
+
+    <!-- Search input -->
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search users by first name..."
+    />
+
+    <!-- User list -->
+    <div id="userList"></div>
+
+    <!-- Pagination controls -->
+    <div id="paginationButtons">
+      <button onclick="previousPage()">Previous</button>
+      <button onclick="nextPage()">Next</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Product Search</title>
+    <title>Student CRUD</title>
     <style>
       * {
         box-sizing: border-box;
@@ -115,32 +115,71 @@
         font-style: italic;
         color: #aaa;
       }
+      form input,
+      form button {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+      }
+
+      form input {
+        width: 160px;
+      }
+
+      form button {
+        background-color: #00c6ff;
+        color: white;
+        cursor: pointer;
+      }
+
+      form button:hover {
+        background-color: #009ed6;
+      }
     </style>
   </head>
   <body>
-    <h1>Search Products</h1>
+    <h1>Search Students</h1>
     <div class="search-container">
       <input
         type="search"
         id="search-input"
-        placeholder="Search for a product..."
+        placeholder="Search for a student..."
       />
       <select id="sort-select">
-        <option value="">Sort by Price</option>
-        <option value="asc">Price: Low to High</option>
-        <option value="desc">Price: High to Low</option>
+        <option value="">Sort by Score</option>
+        <option value="asc">Score: Low to High</option>
+        <option value="desc">Score: High to Low</option>
       </select>
       <select id="sort-Category">
-        <option value="">Sort by Category</option>
-        <option value="beauty">Beauty</option>
-        <option value="fragrances">Fragrances</option>
-        <option value="groceries">Groceries</option>
-        <option value="furniture">Furniture</option>
+        <option value="">Filter Grade</option>
+        <option value="9th">9th</option>
+        <option value="10th">10th</option>
+        <option value="11th">11th</option>
+        <option value="12th">12th</option>
       </select>
       <button id="search-button">Search</button>
     </div>
     <div id="search-results"></div>
     <div id="list"></div>
+    <form
+      id="add-student-form"
+      style="
+        margin-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      "
+    >
+      <input type="text" id="name" placeholder="Name" required />
+      <input type="number" id="age" placeholder="Age" required />
+      <input type="text" id="grade" placeholder="Grade (e.g., 10th)" required />
+      <input type="number" id="score" placeholder="Score" required />
+      <input type="text" id="section" placeholder="Section" required />
+      <button type="submit">Add Student</button>
+    </form>
 
     <script>
       const searchInput = document.getElementById("search-input");
@@ -165,10 +204,12 @@
           card.className = "card";
 
           card.innerHTML = `
-            <h3>${item.title}</h3>
-            <p>${item.description}</p>
-            <p class="price">Price: $${item.price}</p>
-            <p class="category">Category: ${item.category}</p>
+            <h3>Name : ${item.name}</h3>
+            <p>Age: ${item.age}</p>
+            <p>Grade: ${item.grade}</p>
+            <p>Score: ${item.score}</p>
+            <p>Section: ${item.section}</p>
+             <button onclick="deleteStudent('${item.id}')">Delete</button>
           `;
 
           list.appendChild(card);
@@ -180,20 +221,20 @@
         const selectedCategory = sortCategory.value;
         const sortValue = sortSelect.value;
 
-        let filtered = allProducts.filter((product) =>
-          product.title.toLowerCase().includes(searchTerm)
+        let filtered = allProducts.filter((students) =>
+          students.name.toLowerCase().includes(searchTerm)
         );
 
         if (selectedCategory) {
           filtered = filtered.filter(
-            (product) => product.category.toLowerCase() === selectedCategory
+            (students) => students.grade == selectedCategory
           );
         }
 
         if (sortValue === "asc") {
-          filtered.sort((a, b) => a.price - b.price);
+          filtered.sort((a, b) => a.score - b.score);
         } else if (sortValue === "desc") {
-          filtered.sort((a, b) => b.price - a.price);
+          filtered.sort((a, b) => b.score - a.score);
         }
 
         renderProducts(filtered);
@@ -205,16 +246,76 @@
 
       const fetchedData = async () => {
         try {
-          const res = await fetch("https://dummyjson.com/products");
+          const res = await fetch(
+            "https://paievaluation-default-rtdb.asia-southeast1.firebasedatabase.app/students.json"
+          );
           const data = await res.json();
-          allProducts = data.products;
-
+          for (let items in data) {
+            allProducts.push({ id: items, ...data[items] });
+          }
+          console.log(allProducts);
           applyFiltersAndSort();
         } catch (error) {
           console.error("Error:", error);
           list.innerHTML = "<p>Failed to load products. Try again later.</p>";
         }
       };
+
+      const deleteStudent = async (id) => {
+        const confirmDelete = confirm(
+          "Are you sure you want to delete this student?"
+        );
+        if (!confirmDelete) return;
+
+        try {
+          await fetch(
+            `https://paievaluation-default-rtdb.asia-southeast1.firebasedatabase.app/students/${id}.json`,
+            {
+              method: "DELETE",
+            }
+          );
+
+          // Remove from local array
+          allProducts = allProducts.filter((student) => student.id !== id);
+          applyFiltersAndSort(); // Refresh UI
+        } catch (error) {
+          console.error("Error deleting student:", error);
+          alert("Failed to delete student. Try again.");
+        }
+      };
+
+      const form = document.getElementById("add-student-form");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const newStudent = {
+    name: document.getElementById("name").value.trim(),
+    age: Number(document.getElementById("age").value),
+    grade: document.getElementById("grade").value.trim(),
+    score: Number(document.getElementById("score").value),
+    section: document.getElementById("section").value.trim(),
+  };
+
+  try {
+    const response = await fetch("https://paievaluation-default-rtdb.asia-southeast1.firebasedatabase.app/students.json", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newStudent),
+    });
+
+    const data = await response.json();
+    allProducts.push({ id: data.name, ...newStudent }); // `data.name` is the new Firebase ID
+    applyFiltersAndSort(); // Refresh UI
+
+    form.reset(); // Clear form inputs
+  } catch (error) {
+    console.error("Error adding student:", error);
+    alert("Failed to add student. Try again.");
+  }
+});
 
       fetchedData();
 

@@ -31,15 +31,17 @@ const displayUsers = () => {
     btn.className = "deleteBtn";
     div.innerHTML = `<strong>${user.firstName}</strong> <strong>${user.lastName}</strong> (${user.email}) `;
     btn.innerText = "delete";
-    btn.addEventListener("click", deleteUser(user.id));
+    btn.addEventListener("click", () => deleteUser(user.id));
     div.appendChild(btn);
     userList.appendChild(div);
   });
 };
 
 // Search users
-const searchUsers = () => {
-  const searchTerm = searchInput.value.toLowerCase();
+const searchUsers = (searchTerm) => {
+  // const searchTerm = searchInput.value.toLowerCase();
+  let now = Date.now()
+  console.log("function called!!!",now)
   if (!searchTerm) {
     currentData = originalData;
     displayUsers();
@@ -82,8 +84,14 @@ function deleteUser(id) {
   }
 }
 
+let timer;
 // Bind search input event
-searchInput.addEventListener("input", searchUsers);
+searchInput.addEventListener("input", function (event) {
+  clearTimeout(timer);
+  timer =setTimeout(() => {
+    searchUsers(event.target.value);
+  }, 800);
+});
 
 // Initial fetch
 fetchUsers(itemsPerPage, skip);

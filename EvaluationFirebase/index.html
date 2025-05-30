@@ -231,11 +231,11 @@
           );
         }
 
-        // if (sortValue === "asc") {
-        //   filtered.sort((a, b) => a.score - b.score);
-        // } else if (sortValue === "desc") {
-        //   filtered.sort((a, b) => b.score - a.score);
-        // }
+        if (sortValue === "asc") {
+          filtered.sort((a, b) => a.score - b.score);
+        } else if (sortValue === "desc") {
+          filtered.sort((a, b) => b.score - a.score);
+        }
 
         renderProducts(filtered);
 

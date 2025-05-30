@@ -69,54 +69,88 @@ class LinkedList {
   }
 
   removeValue(value) {
-   if (!this.head) return;
+    if (!this.head) return;
 
     // Special case: if head needs to be removed
     if (this.head.data == value) {
-        this.head = this.head.next;
-        this.size--;
-        return;
+      this.head = this.head.next;
+      this.size--;
+      return;
     }
 
     let current = this.head;
 
     while (current.next) {
-        if (current.next.data == value) {
-            current.next = current.next.next;
-            this.size--;
-            return;
-        }
-        current = current.next;
+      if (current.next.data == value) {
+        current.next = current.next.next;
+        this.size--;
+        return;
+      }
+      current = current.next;
     }
   }
 
-  reverseLL(){
-    let curr = this.head
-    let prev = null
-    let next = null
+  reverseLL() {
+    let curr = this.head;
+    let prev = null;
+    let next = null;
 
-    while(curr!=null){
-        next = curr.next
-        curr.next = prev
-        prev = curr
-        curr = next
+    while (curr != null) {
+      next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
     }
 
-    this.head = prev
+    this.head = prev;
 
-    console.log(this.display(prev))
+    console.log(this.display(prev));
   }
 
-  findMiddle(){
-    let slow = this.head
-    let fast = this.head
+  findMiddle() {
+    let slow = this.head;
+    let fast = this.head;
 
-    while(fast !=null && fast.next !=null){
-        slow = slow.next
-        fast = fast.next.next
+    while (fast != null && fast.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
     }
 
-    console.log(slow.data)
+    console.log(slow.data);
+  }
+
+  nthNode(K) {
+    let curr = this.head;
+    let size = this.size;
+    for (let i = 1; i <size - K + 1; i++) {
+      curr = curr.next;
+    }
+    
+    console.log(curr.data);
+  }
+
+   removenthNode(K) {
+    let curr = this.head;
+    let size = this.size;
+    for (let i = 1; i < size - K; i++) {
+      curr = curr.next;
+    }
+   curr.next = curr.next.next
+  }
+
+  reversePair() {
+    let curr = this.head;
+    let arr = [];
+
+    while (curr !== null) {
+      arr.push(curr.data);
+      curr = curr.next;
+    }
+
+    for (let i = 0; i < arr.length - 2; i += 2) {
+      [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+    }
+    console.log(arr);
   }
 
   display(head) {
@@ -139,11 +173,9 @@ LL.addItem(10);
 LL.addItem(20);
 LL.addItem(30);
 LL.addItem(60);
-
+LL.addItem(80);
 LL.display();
 
-LL.removeValue(30)
-
+LL.nthNode(3)
+LL.removenthNode(3)
 LL.display();
-
-LL.reverseLL()

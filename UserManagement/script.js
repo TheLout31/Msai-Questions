@@ -1,4 +1,4 @@
-let itemsPerPage = 10;
+let itemsPerPage = 40;
 let skip = 0;
 let currentPage = 1;
 
@@ -10,11 +10,12 @@ let originalData = [];
 
 // Fetch and display users
 const fetchUsers = (items, skip) => {
+  console.log("Fetch func called!!!!");
   fetch(`https://dummyjson.com/users?limit=${items}&skip=${skip}`)
     .then((response) => response.json())
     .then((data) => {
-      currentData = data.users;
-      originalData = data.users;
+      currentData = [...currentData, ...data.users];
+      originalData = [...originalData, ...data.users];
       displayUsers();
     })
     .catch((error) => console.error("Error fetching data:", error));
@@ -40,8 +41,8 @@ const displayUsers = () => {
 // Search users
 const searchUsers = (searchTerm) => {
   // const searchTerm = searchInput.value.toLowerCase();
-  let now = Date.now()
-  console.log("function called!!!",now)
+  let now = Date.now();
+  console.log("function called!!!", now);
   if (!searchTerm) {
     currentData = originalData;
     displayUsers();
@@ -61,17 +62,32 @@ const searchUsers = (searchTerm) => {
 };
 
 // Pagination controls
+
 const nextPage = () => {
   skip += itemsPerPage;
   fetchUsers(itemsPerPage, skip);
 };
-
-const previousPage = () => {
-  if (skip >= itemsPerPage) {
-    skip -= itemsPerPage;
-    fetchUsers(itemsPerPage, skip);
+window.addEventListener("scroll", function () {
+ 
+  if (
+    window.scrollY + window.innerHeight >=
+    document.documentElement.scrollHeight
+  ) {
+    console.log(
+    "window.scrollY" + window.scrollY,
+    "window.innerHeight" + window.innerHeight,
+    " document.documentElement.scrollHeight" +
+      document.documentElement.scrollHeight
+  );
+    nextPage();
   }
-};
+});
+// const previousPage = () => {
+//   if (skip >= itemsPerPage) {
+//     skip -= itemsPerPage;
+//     fetchUsers(itemsPerPage, skip);
+//   }
+// };
 
 function deleteUser(id) {
   const filteredData = originalData.filter((user) => user.id !== id);
@@ -88,7 +104,7 @@ let timer;
 // Bind search input event
 searchInput.addEventListener("input", function (event) {
   clearTimeout(timer);
-  timer =setTimeout(() => {
+  timer = setTimeout(() => {
     searchUsers(event.target.value);
   }, 800);
 });

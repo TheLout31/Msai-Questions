@@ -103,8 +103,6 @@ class LinkedList {
     }
 
     this.head = prev;
-
-    console.log(this.display(prev));
   }
 
   findMiddle() {
@@ -122,20 +120,20 @@ class LinkedList {
   nthNode(K) {
     let curr = this.head;
     let size = this.size;
-    for (let i = 1; i <size - K + 1; i++) {
+    for (let i = 1; i < size - K + 1; i++) {
       curr = curr.next;
     }
-    
+
     console.log(curr.data);
   }
 
-   removenthNode(K) {
+  removenthNode(K) {
     let curr = this.head;
     let size = this.size;
     for (let i = 1; i < size - K; i++) {
       curr = curr.next;
     }
-   curr.next = curr.next.next
+    curr.next = curr.next.next;
   }
 
   reversePair() {
@@ -151,6 +149,32 @@ class LinkedList {
       [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
     }
     console.log(arr);
+  }
+
+  addOne() {
+    let temp = this.head;
+    let carry = 1;
+
+    while (temp !== null) {
+      if (carry == 0) {
+        break;
+      }
+      let sum = temp.data + carry;
+
+      if (sum == 10) {
+        temp.data = 0;
+        carry = 1;
+      } else {
+        temp.data +=1
+        carry = 0;
+      }
+      temp = temp.next;
+    }
+    if (carry == 1) {
+      let ele = new Node(1);
+      ele.next = this.head;
+      this.head = ele;
+    }
   }
 
   display(head) {
@@ -169,13 +193,13 @@ class LinkedList {
 }
 
 const LL = new LinkedList();
-LL.addItem(10);
-LL.addItem(20);
-LL.addItem(30);
-LL.addItem(60);
-LL.addItem(80);
-LL.display();
+LL.addItem(1);
+LL.addItem(9);
+LL.addItem(9);
 
-LL.nthNode(3)
-LL.removenthNode(3)
 LL.display();
+LL.reverseLL();
+LL.display();
+LL.addOne()
+LL.reverseLL();
+LL.display()

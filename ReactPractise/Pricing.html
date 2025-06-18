@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Pricing!</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .pricing-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-top: 30px;
+      }
+
+      .card {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 250px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-title {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .card-price {
+        font-size: 1.2em;
+        color: #4caf50;
+        margin: 10px 0;
+      }
+
+      .card ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0 0 15px;
+        color: #666;
+      }
+
+      .card li {
+        margin-bottom: 8px;
+      }
+
+      .card button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1em;
+      }
+
+      .card button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Hello World!</h1>
+    <p id="currentTime"></p>
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useState } = React;
+
+      function CustomCard({ plan, price,color }) {
+        return (
+          <div className="card">
+            <div className="card-title">{plan}</div>
+            <ul>
+              <li>Unlimited Access</li>
+              <li>Priority Support</li>
+              <li>All Features</li>
+            </ul>
+            <div className="card-price">${price}</div>
+            <button style={{ backgroundColor: color }}>Get Started</button>
+          </div>
+        );
+      }
+      function Pricing() {
+        return (
+          <div className="pricing-container">
+            <CustomCard plan="Free" price="0" color="green"/>
+            <CustomCard plan="Pro" price="9.99" color="purple"/>
+            <CustomCard plan="Enterprise" price="29.99" color="gold"/>
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <>
+            <Pricing />
+          </>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>

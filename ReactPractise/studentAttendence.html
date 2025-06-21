@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Student List Toggle</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+        padding: 30px;
+      }
+      .student-card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 15px 20px;
+        margin-bottom: 15px;
+        width: 300px;
+      }
+      .present {
+        color: green;
+        font-weight: bold;
+      }
+      .absent {
+        color: red;
+        font-weight: bold;
+      }
+      .toggle-btn {
+        margin-top: 10px;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      .toggle-btn:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Student Attendance</h1>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function App() {
+        const [students, setStudents] = React.useState([
+          { id: 1, name: "Imran", present: false },
+          { id: 2, name: "Rohan", present: false },
+          { id: 3, name: "Tushar", present: false },
+        ]);
+
+        function togglePresence(id) {
+          const updatedStudents = students.map((student) =>
+            student.id === id
+              ? { ...student, present: !student.present }
+              : student
+          );
+          setStudents(updatedStudents);
+        }
+
+        return (
+          <div>
+            {students.map((student) => (
+              <div className="student-card" key={student.id}>
+                <h3>{student.name}</h3>
+                <p>
+                  Status:{" "}
+                  <span className={student.present ? "present" : "absent"}>
+                    {student.present ? "Present" : "Absent"}
+                  </span>
+                </p>
+                <button
+                  className="toggle-btn"
+                  onClick={() => togglePresence(student.id)}
+                >
+                  Mark {student.present ? "Absent" : "Present"}
+                </button>
+              </div>
+            ))}
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>

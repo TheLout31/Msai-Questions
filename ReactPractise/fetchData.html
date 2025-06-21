@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Hello, World!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin: 5px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    #main-cont {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+    #card-container {
+      padding: 10px;
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 1rem; /* Optional gap between cards */
+    }
+    #card {
+      background-color: azure;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      text-align: center;
+      border-radius: 20px;
+      box-shadow: inset;
+    }
+    .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid blue;
+      border-bottom: 16px solid blue;
+      width: 120px; 
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+  </style>
+  <body>
+    <h1 class="title">Hello World!</h1>
+    <p id="currentTime"></p>
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useState, useEffect } = React;
+
+      function FetchData() {
+        const [items, setItems] = useState([]);
+        const [loading, setLoading] = useState(false);
+        async function fetchData() {
+          setLoading(true);
+          console.log("Function called!!!!");
+          try {
+            const res = await fetch("https://fakestoreapi.com/products");
+            const data = await res.json();
+            console.log("API data", data);
+            setItems(data);
+            setLoading(false);
+          } catch (e) {
+            console.log(e);
+          }
+        }
+        useEffect(() => {
+          fetchData();
+        }, []);
+        return (
+          <div id="main-cont">
+            {loading ? (
+              <div class="loader"></div>
+            ) : (
+              <div id="card-container">
+                {items.map((item) => (
+                  <div id="card" key={item.id}>
+                    <li>Title: {item.title}</li>
+                    <li>Price: {item.price}</li>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<FetchData />);
+    </script>
+  </body>
+</html>

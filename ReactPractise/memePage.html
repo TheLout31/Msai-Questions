@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Memes Gallery</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+      :root {
+        --bg-light: #f0f2f5;
+        --bg-dark: #1e1e2f;
+        --card-light: #ffffff;
+        --card-dark: #2c2c3e;
+        --text-light: #000;
+        --text-dark: #fff;
+        --accent: #007bff;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      body.light {
+        background-color: var(--bg-light);
+        color: var(--text-light);
+      }
+
+      body.dark {
+        background-color: var(--bg-dark);
+        color: var(--text-dark);
+      }
+
+      #main-cont {
+        padding: 20px;
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      .controls {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        gap: 10px;
+      }
+
+      .controls input,
+      .controls select,
+      .controls button {
+        padding: 8px 12px;
+        font-size: 16px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
+
+      .controls button {
+        background-color: var(--accent);
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      #card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+      }
+
+      .card {
+        background-color: var(--card-light);
+        padding: 15px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+      }
+
+      body.dark .card {
+        background-color: var(--card-dark);
+      }
+
+      .card img {
+        max-width: 100%;
+        border-radius: 10px;
+      }
+
+      .loader {
+        margin: 100px auto;
+        border: 16px solid #f3f3f3;
+        border-top: 16px solid var(--accent);
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body class="light">
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState, useEffect } = React;
+      
+      function MemeGallery() {
+        const [items, setItems] = useState([]);
+        const [loading, setLoading] = useState(false);
+        const [search, setSearch] = useState("");
+        const [sortOrder, setSortOrder] = useState("asc");
+        const [theme, setTheme] = useState("light");
+
+        useEffect(() => {
+          fetchMemes();
+        }, []);
+
+        async function fetchMemes() {
+          setLoading(true);
+          try {
+            const res = await axios.get("https://api.imgflip.com/get_memes");
+            // const data = await res.json();
+            setItems(res.data.data.memes);
+          } catch (e) {
+            console.error(e);
+          }
+          setLoading(false);
+        }
+
+        function toggleTheme() {
+          const newTheme = theme === "light" ? "dark" : "light";
+          setTheme(newTheme);
+          document.body.className = newTheme;
+        }
+
+        const filtered = items
+          .filter((meme) =>
+            meme.name.toLowerCase().includes(search.toLowerCase())
+          )
+          .sort((a, b) => {
+            return sortOrder === "asc"
+              ? a.name.localeCompare(b.name)
+              : b.name.localeCompare(a.name);
+          });
+
+        return (
+          <div id="main-cont">
+            <h1>🖼️ Meme Gallery</h1>
+            <div className="controls">
+              <input
+                type="text"
+                placeholder="Search memes..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <select
+                onChange={(e) => setSortOrder(e.target.value)}
+                value={sortOrder}
+              >
+                <option value="asc">Sort A → Z</option>
+                <option value="desc">Sort Z → A</option>
+              </select>
+              <button onClick={toggleTheme}>
+                Toggle to {theme === "light" ? "Dark" : "Light"} Theme
+              </button>
+            </div>
+
+            {loading ? (
+              <div className="loader"></div>
+            ) : (
+              <div id="card-container">
+                {filtered.map((meme) => (
+                  <div className="card" key={meme.id}>
+                    <h4>{meme.name}</h4>
+                    <img src={meme.url} alt={meme.name} />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<MemeGallery />);
+    </script>
+  </body>
+</html>
